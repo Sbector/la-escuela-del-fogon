@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import localFont from 'next/font/local'
+import Wrapper from './_components/Wrapper'
 
 const degheest = localFont({ src: './fonts/Director-Regular.woff2' })
 
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="es" className='relative'>
       <body className={`bg-white ${degheest.className}`}>
         <main>
-          {children}
+          <Wrapper>
+            {children}
+          </Wrapper>
         </main>
       </body>
     </html>

@@ -1,3 +1,7 @@
+import Button from "../_components/Button"
+import Link from "next/link"
+
+
 export default function JaimePage() {
     return (
         <div className="">
@@ -31,6 +35,11 @@ export default function JaimePage() {
                     Los anafres de Jaime no sólo son un medio de sustento para su familia, también representan una conexión con la transfomación de la basura y la creatividad.
                 </p>
             </div>
+            <Link href="/jaime/instrucciones">
+            <Button>
+                Instrucciones
+            </Button>
+            </Link>
         </div>
     )
 }

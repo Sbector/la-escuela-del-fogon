@@ -7,7 +7,10 @@ export default function Wrapper({
 }) {
     return (
         <div className={`${className}
-        p-10
+        flex flex-col
+        min-h-screen max-w-full
+        py-20 px-10
+        text-sm
         `}>
             {children}
         </div>

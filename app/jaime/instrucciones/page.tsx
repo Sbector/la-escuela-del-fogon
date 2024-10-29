@@ -1,10 +1,10 @@
-import PrimerPaso from "@/app/_instructions/PrimerPaso";
+import PrimerPaso from "@/app/_pasosSVG/PrimerPaso";
 
 export default function InstruccionesPage() {
     return (
-    <div className="w-[400px]">
-        <h1>Hola!</h1>
-        <PrimerPaso></PrimerPaso>
+    <div>
+        <h1>1.0 Recolectar</h1>
+        <PrimerPaso className=""/>
     </div>
     )
 

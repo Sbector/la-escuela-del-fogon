@@ -11,6 +11,7 @@ export default function Wrapper({
         min-h-screen max-w-full
         py-20 px-10
         text-sm
+        snap-start 
         `}>
             {children}
         </div>

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import localFont from 'next/font/local'
-import Wrapper from './_components/Wrapper'
 
 const degheest = localFont({ src: './fonts/Director-Regular.woff2' })
 
@@ -17,12 +16,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className='relative'>
+    <html lang="es" className='relative scroll-smooth '>
       <body className={`bg-white ${degheest.className}`}>
         <main>
-          <Wrapper>
-            {children}
-          </Wrapper>
+          {children}
         </main>
       </body>
     </html>

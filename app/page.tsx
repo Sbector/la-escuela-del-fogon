@@ -1,9 +1,8 @@
 export default function HomePage() {
-    return(
-        <>
-            <h1 className="text-4xl pb-6">LA ESCUELA DEL FOGÓN</h1>
+    return (
+        <div className="flex flex-col justify-end h-[360px]">
             <h2 className="text-xl pb-4">PRESENTA</h2>
-        
-        </>
+        </div>
+
     )
 }

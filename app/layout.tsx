@@ -1,5 +1,12 @@
+import { Azeret_Mono } from 'next/font/google'
 import Nav from "./_components/Nav"
+import Wrapper from "./_components/Wrapper";
 import "./globals.css"
+
+const azeret = Azeret_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'LA ESCUELA DEL FOGÓN',
@@ -12,13 +19,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-        <body>
-          <div style={{ backgroundColor: "lightblue", padding: "1rem" }}>
-              <Nav/>
-          </div>
+    <html lang="es" className={`
+      ${azeret.className}`}>
+      <body>
+        <Nav />
+        <Wrapper>
           {children}
-        </body>
+        </Wrapper>
+      </body>
     </html>
   )
 }

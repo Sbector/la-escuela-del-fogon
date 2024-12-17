@@ -1,7 +1,13 @@
-export default function Wrapper({children,}: {children: React.ReactNode}) {
-    return(
-        <div className="flex min-h-[calc(100dvh-80px)] w-screen">
-            {children}
-        </div>
-    )
+import { ReactNode } from 'react';
+
+interface WrapperProps {
+  children: ReactNode;
+}
+
+export default function Wrapper({ children }: WrapperProps) {
+  return (
+    <div className="flex flex-col min-h-screen px-0">
+      {children}
+    </div>
+  );
 }

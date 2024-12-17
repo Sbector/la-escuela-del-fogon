@@ -1,5 +1,5 @@
 import { Azeret_Mono } from 'next/font/google'
-import Nav from "./_components/Nav"
+import Header from "./_components/Header"
 import Wrapper from "./_components/Wrapper";
 import "./globals.css"
 
@@ -20,9 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`
-      ${azeret.className}`}>
+      ${azeret.className} bg-neutral-50`}>
       <body>
-        <Nav />
+        <Header />
         <Wrapper>
           {children}
         </Wrapper>

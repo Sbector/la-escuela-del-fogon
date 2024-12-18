@@ -15,17 +15,13 @@ export default function HomePage() {
                         type="Publicación"
                         title="Manual para la elaboración de anafre de lata"
                     />
-                </section>
-
-                {/* Serie de tarjetas adicionales */}
-                <section className="grid grid-cols-1 md:grid-cols-2">
                     <Card
-                        imageUrl="/images/caso1.png"
-                        caseNumber="01"
+                        imageUrl="/images/caso3.png"
+                        caseNumber="03"
                         institution="Proyector"
-                        location="Ubicación caso 1"
-                        type="Tipo caso 1"
-                        title="Título caso 1"
+                        location="CDMX"
+                        type="Fogón"
+                        title="Los anafres de Jaime"
                     />
                     <Card
                         imageUrl="/images/caso2.png"
@@ -36,20 +32,12 @@ export default function HomePage() {
                         title="Título caso 2"
                     />
                     <Card
-                        imageUrl="/images/caso3.png"
-                        caseNumber="03"
-                        institution="MAZ"
-                        location="Ubicación caso 3"
-                        type="Tipo caso 3"
-                        title="Título caso 3"
-                    />
-                    <Card
-                        imageUrl="/images/caso4.png"
-                        caseNumber="04"
-                        institution="Foodscapes"
-                        location="CDMX"
-                        type="Publicación"
-                        title="Manual para la elaboración de anafre de lata"
+                        imageUrl="/images/caso1.png"
+                        caseNumber="01"
+                        institution="Proyector"
+                        location="Ubicación caso 1"
+                        type="Tipo caso 1"
+                        title="Título caso 1"
                     />
                 </section>
             </main>

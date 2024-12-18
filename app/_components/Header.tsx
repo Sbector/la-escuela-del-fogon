@@ -17,10 +17,10 @@ const navLinks = [
 export default function Header() {
     const pathname = usePathname()
     return (
-        <header className="flex justify-between items-center px-4 py-6 h-16">
+        <header className="sticky top-0 flex justify-between items-center px-4 py-6 h-16 z-50 bg-neutral-50">
             <h1 className={`text-4xl ${xanhMono.className}`}>LEDF</h1>
-            <button className="bg-black text-white px-4 py-2 rounded-full">
-                MENÚ
+            <button className="bg-black text-white px-3 py-1 rounded-full">
+                +
             </button>
             {/* <ul className='flex gap-4 px-4 py-2 text-xl'>
                 {navLinks.map((link) => {

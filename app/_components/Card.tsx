@@ -9,14 +9,14 @@ interface CardProps {
 
 export default function Card({ imageUrl, caseNumber, institution, location, type, title }: CardProps) {
     return (
-        <div className="relative w-full h-[calc(100vh-4rem)] flex flex-col justify-between overflow-hidden shadow-lg border border-opacity-30 border-neutral-50 bg-neutral-900">
+        <div className="snap-start relative w-full h-full flex flex-col justify-between overflow-hidden shadow-lg border border-opacity-30 border-neutral-50 bg-neutral-900">
             {/* Imagen de fondo */}
             <div className="absolute inset-0">
                 <img src={imageUrl} alt={title} className="w-full h-full object-cover filter brightness-50" />
             </div>
 
-           {/* Identificadores superiores */}
-           <div className="relative z-10 flex flex-row justify-between items-center space-x-4 px-4 py-4">
+            {/* Identificadores superiores */}
+            <div className="relative z-10 flex flex-row justify-between items-center space-x-4 px-4 py-4">
                 <span className="text-xs uppercase font-medium tracking-wide text-white">
                     {institution}
                 </span>

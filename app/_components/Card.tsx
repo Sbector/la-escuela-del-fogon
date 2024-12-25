@@ -12,43 +12,52 @@ export default function Card({ imageUrl, caseNumber, institution, location, type
         // Contenedor de tarjeta
         <div className="snap-start overflow-hidden
         relative 
-        w-full h-full flex lg:flex-row
-        border-b border-neutral-50 lg:border-neutral-900">
+        w-full h-full flex xl:flex-row
+        border-b border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900">
             {/* Imagen de fondo */}
-            <div className="absolute inset-0 h-full lg:relative lg:w-2/5">
+            <div className="inset-0 h-full
+            absolute landscape:relative xl:relative
+            w-full landscape:w-2/5 xl:w-2/5">
                 <img src={imageUrl} alt={title} className="w-full h-full
                  object-cover 
-                 filter brightness-50 lg:brightness-100" />
+                 filter brightness-50 landscape:brightness-100 xl:brightness-100" />
             </div>
             {/* Identificadores */}
             <div className="relative z-10
-            h-full w-full lg:w-3/5
-            flex flex-col-reverse lg:flex-col 
-            justify-between
-            uppercase
-            lg:pt-3
-            text-neutral-50 lg:text-neutral-900">
+            h-full w-full landscape:w-3/5 xl:w-3/5
+            flex flex-col-reverse landscape:flex-col xl:flex-col
+            justify-between landscape:justify-start xl:justify-start
+            px-3 py-4 landscape:px-10 xl:px-10
+            uppercase text-neutral-50 landscape:text-neutral-900 xl:text-neutral-900">
                 {/* Indicadores primarios */}
-                <div className="relative z-10 flex flex-col lg:flex-row lg:gap-28 items-start lg:leading-none px-4 py-4">
+                <div className="relative z-10 
+                flex flex-col landscape:flex-row xl:flex-row 
+                landscape:gap-10 xl:gap-10
+                items-start llandscape:leading-none xl:leading-none 
+                ">
                     <span className="rounded-xl border
-                    border-neutral-50 lg:border-neutral-900
+                    border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900
                     text-md
-                    px-1 mb-4 lg:mt-2 lg:ml-4
+                    px-1 mb-4
                     ">{caseNumber}
                     </span>
-                    <h2 className="text-md lg:text-3xl leading-tight">
+                    <h2 className="text-md lg:text-2xl xl:text-3xl leading-tight">
                         {title}
                     </h2>
                 </div>
                 {/* Identificadores secundarios */}
-                <div className=" flex flex-row justify-between items-center space-x-4 px-4 py-4">
+                <div className="flex flex-row 
+                    justify-between items-center xl:justify-end 
+                    xl:gap-10">
                     <span className="text-xs uppercase font-medium tracking-wide">
                         {institution}
                     </span>
                     <span className="text-xs uppercase font-medium tracking-wide">
                         {location}
                     </span>
-                    <span className="text-[10px] uppercase font-medium tracking-wide rounded-full px-3 py-0.5 border border-neutral-50 lg:border-neutral-900 leading-none">
+                    <span className="text-[10px] uppercase font-medium leading-none tracking-wide
+                    rounded-full px-3 py-0.5 
+                    border border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900">
                         {type}
                     </span>
                 </div>

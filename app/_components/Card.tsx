@@ -33,12 +33,12 @@ export default function Card({ imageUrl, caseNumber, institution, location, type
                 <div className="relative z-10 
                 flex flex-col landscape:flex-row xl:flex-row 
                 landscape:gap-10 xl:gap-10
-                items-start llandscape:leading-none xl:leading-none 
+                items-start landscape:items-center
                 ">
                     <span className="rounded-xl border
                     border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900
                     text-md
-                    px-1 mb-4
+                    px-1 mb-4 landscape:mb-0
                     ">{caseNumber}
                     </span>
                     <h2 className="text-md lg:text-2xl xl:text-3xl leading-tight">
@@ -47,7 +47,8 @@ export default function Card({ imageUrl, caseNumber, institution, location, type
                 </div>
                 {/* Identificadores secundarios */}
                 <div className="flex flex-row 
-                    justify-between items-center xl:justify-end 
+                    w-96
+                    justify-between items-center
                     xl:gap-10">
                     <span className="text-xs uppercase font-medium tracking-wide">
                         {institution}

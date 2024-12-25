@@ -26,17 +26,17 @@ export default function HomePage() {
                     imageUrl="/images/caso2.png"
                     caseNumber="02"
                     institution="MAZ"
-                    location="Ubicación caso 2"
-                    type="Tipo caso 2"
-                    title="Título caso 2"
+                    location="Zapopan, Mex."
+                    type="exhibición"
+                    title="Cocinar la revolución en América"
                 />
                 <Card
                     imageUrl="/images/caso1.png"
                     caseNumber="01"
-                    institution="Proyector"
-                    location="Ubicación caso 1"
-                    type="Tipo caso 1"
-                    title="Título caso 1"
+                    institution="MAZ"
+                    location="Zapopan, Mex."
+                    type="fogón"
+                    title="Cocinar la revolución en América"
                 />
             </main>
         </>

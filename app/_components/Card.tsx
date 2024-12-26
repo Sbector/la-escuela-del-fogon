@@ -27,7 +27,7 @@ export default function Card({ imageUrl, caseNumber, institution, location, type
             h-full w-full landscape:w-3/5 xl:w-3/5
             flex flex-col-reverse landscape:flex-col xl:flex-col
             justify-between landscape:justify-start xl:justify-start
-            px-3 py-4 landscape:px-10 xl:px-10
+            px-3 py-4 landscape:px-16 xl:px-10
             uppercase text-neutral-50 landscape:text-neutral-900 xl:text-neutral-900">
                 {/* Indicadores primarios */}
                 <div className="relative z-10 
@@ -37,6 +37,7 @@ export default function Card({ imageUrl, caseNumber, institution, location, type
                 ">
                     <span className="rounded-xl border
                     border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900
+                    landscape:absolute landscape:-ml-12
                     text-md
                     px-1 mb-4 landscape:mb-0
                     ">{caseNumber}
@@ -47,18 +48,18 @@ export default function Card({ imageUrl, caseNumber, institution, location, type
                 </div>
                 {/* Identificadores secundarios */}
                 <div className="flex flex-row 
-                    w-96
                     justify-between items-center
-                    xl:gap-10">
+                    landscape:gap-10 landscape:pt-8 xl:gap-10">
                     <span className="text-xs uppercase font-medium tracking-wide">
                         {institution}
                     </span>
                     <span className="text-xs uppercase font-medium tracking-wide">
                         {location}
                     </span>
-                    <span className="text-[10px] uppercase font-medium leading-none tracking-wide
+                    <span className="landscape:absolute landscape:bottom-8 landscape:right-16
                     rounded-full px-3 py-0.5 
-                    border border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900">
+                    border border-neutral-50 landscape:border-neutral-900 xl:border-neutral-900
+                    text-[10px] uppercase font-medium leading-none tracking-wide">
                         {type}
                     </span>
                 </div>

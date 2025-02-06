@@ -48,7 +48,7 @@ export default function Header() {
                     x: isMenuOpen ? "0" : "0", // Ajuste para centrar el círculo
                     y: isMenuOpen ? "%" : "0", // Ajuste para centrar el círculo
                 }}
-                transition={{ duration: 0.2 }} // Transición suave
+                transition={{ duration: 0.25 }} // Transición suave
             >
             </motion.button>
 

@@ -1,41 +1,28 @@
-'use client'
+"use client"
+import { Xanh_Mono } from 'next/font/google'
 import Link from "next/link"
-import { useSelectedLayoutSegment } from "next/navigation"
-import { Icon } from '@iconify/react'
 
-import useScroll from "../_hooks/use-scroll"
-import { cn } from "../_lib/utils"
+
+const xanhMono = Xanh_Mono({
+    subsets: ['latin'],
+    weight: '400', // Solo se permite '400'
+});
 
 export default function Header() {
-    const scrolled = useScroll(5)
-    const selectedLayout = useSelectedLayoutSegment()
+    
 
     return (
-        <div
-            className={cn(
-                `sticky inset-x-0 top-0 z-30 w-full transition-all border-b border-gray-200`,
-                {
-                    'border-b border-gray-200 bg-white/75 backdrop-blur-lg': scrolled,
-                    'border-b border-gray-200 bg-white': selectedLayout,
-                },
-            )}
-        >
-            <div className="flex h-[47px] items-center justify-between px-4">
-                <div className="flex items-center space-x-4">
-                    <Link
-                        href="/"
-                        className="flex flex-row space-x-3 items-center justify-center md:hidden"
-                    >
-                        <span className="font-bold text-xl flex ">LA ESCUELA DEL FOGÓN</span>
-                    </Link>
-                </div>
+        <header className="fixed top-0 w-screen 
+        flex justify-between items-center 
+        px-4 py-3 h-16 
+        z-50 border-b 
+        border-neutral-900 bg-neutral-50">
+            <Link href="/">
+                <h1 className={`text-4xl md:hidden ${xanhMono.className}`}>LEDF</h1>
+                <h1 className={`text-4xl hidden md:flex ${xanhMono.className}`}>LA ESCUELA DEL FOGÓN</h1>
+            </Link>
 
-                <div className="hidden md:block">
-                    <div className="h-8 w-8 rounded-full bg-zinc-300 flex items-center justify-center text-center">
-                    <Icon icon='lucide:home' width='24' height='24' />
-                    </div>
-                </div>
-            </div>
-        </div>
+            
+        </header>
     )
 }

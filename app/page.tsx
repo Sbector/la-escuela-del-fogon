@@ -1,17 +1,44 @@
-import Fig1 from "./Fig1"
-import Logo from "./Logo"
-import About from "./about/page"
+import Card from './_components/Card';
 
-
-export default function Home() {
-  return (
-
-    <section id="home" className="bg-[#F2F4E0] w-full min-h-screen grid place-items-center overflow-hidden">
-      <div className="grid gap-10 w-[318px] xl:w-[738px] xl:grid-cols-2 h-full place-items-center">
-        <Logo />
-        <Fig1 />
-      </div>
-    </section>
-
-  )
+export default function HomePage() {
+    return (
+        <>
+            {/* Contenido principal */}
+            <main className="snap-y snap-mandatory overflow-scroll h-screen no-scrollbar">
+                {/* Tarjetas */}
+                <Card
+                    imageUrl="/images/caso4.png"
+                    caseNumber="04"
+                    institution="Foodscapes"
+                    location="CDMX"
+                    type="Publicación"
+                    title="Manual para la elaboración de anafre de lata"
+                />
+                <Card
+                    imageUrl="/images/caso3.png"
+                    caseNumber="03"
+                    institution="Proyector"
+                    location="CDMX"
+                    type="Fogón"
+                    title="Los anafres de Jaime"
+                />
+                <Card
+                    imageUrl="/images/caso2.png"
+                    caseNumber="02"
+                    institution="MAZ"
+                    location="Zapopan, Mex."
+                    type="exhibición"
+                    title="Cocinar la revolución en América"
+                />
+                <Card
+                    imageUrl="/images/caso1.png"
+                    caseNumber="01"
+                    institution="MAZ"
+                    location="Zapopan, Mex."
+                    type="fogón"
+                    title="Cocinar la revolución en América"
+                />
+            </main>
+        </>
+    );
 }

@@ -1,87 +1,70 @@
-'use client'
-
-import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
-import { NAV_ITEMS } from "../constants"
-import { NavItem } from "../types"
-import { Icon } from '@iconify/react'
+import { useState } from "react"
+import { motion } from "framer-motion" // Importar framer-motion
 
 export default function Nav() {
-    return (
-        <div className="md:w-60 bg-white h-screen flex-1 fixed border-r border-zinc-200 hidden md:flex">
-            <div className="flex flex-col space-y-6 w-full">
-                <Link
-                    href="/"
-                    className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-zinc-200 h-12 w-full"
-                >
-                    <span className="font-bold text-[12px] hidden md:flex">LA ESCUELA DEL FOGÓN</span>
-                </Link>
+    const navLinks = [
+        { name: "INICIO", href: "/" },
+        { name: "ABOUT", href: "/about" },
+        { name: "CASOS", href: "/casos" },
+        { name: "CONTACTO", href: "/contacto" },
+    ]
 
-                <div className="flex flex-col space-y-2 md:px-6 ">
-                    {NAV_ITEMS.map((item, idx) => {
-                        return <MenuItem key={idx} item={item} />;
-                    })}
-                </div>
-            </div>
-        </div>
+    const [isMenuOpen, setMenuOpen] = useState(false)
+    const pathname = usePathname()
+
+    const toggleMenu = () => {
+        setMenuOpen(!isMenuOpen)
+    }
+    return (
+        <>
+        {/* Usar motion.button para animación */}
+        <motion.button
+                onClick={toggleMenu}
+                className={`bg-black 
+                flex items-center justify-center 
+                rounded-full focus:outline-none transition-all duration-300`}
+                initial={{ width: "2rem", height: "2rem" }} // Tamaño inicial
+                animate={{
+                    scale: isMenuOpen ? 200 : 1.1, // Escala al hacer clic
+                    borderRadius: isMenuOpen ? "50%" : "50%", // Mantiene la forma circular
+                    top: isMenuOpen ? "0" : "0", // Alinea al centro cuando el menú está abierto
+                    left: isMenuOpen ? "0" : "0", // Alinea al centro cuando el menú está abierto
+                    x: isMenuOpen ? "0" : "0", // Ajuste para centrar el círculo
+                    y: isMenuOpen ? "%" : "0", // Ajuste para centrar el círculo
+                }}
+                transition={{ duration: 0.25 }} // Transición suave
+            >
+            </motion.button>
+
+            {/* Menú animado */}
+            {isMenuOpen && (
+                <motion.div
+                    className="fixed inset-0 flex items-center justify-center text-white z-50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }} // Efecto al cerrar
+                    transition={{ duration: 0.7 }}
+                >
+                    <ul className="text-center text-4xl space-y-6">
+                        {navLinks.map((link) => {
+                            const isActive = pathname.startsWith(link.href)
+                            return (
+                                <li key={link.name}>
+                                    <Link
+                                        href={link.href}
+                                        onClick={() => setMenuOpen(false)} // Cierra el menú al hacer clic
+                                        className={`hover:underline ${isActive ? "font-bold" : "font-normal"}`}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </motion.div>
+            )}
+        </>
     )
 }
-
-const MenuItem = ({ item }: { item: NavItem }) => {
-    const pathname = usePathname();
-    const [subMenuOpen, setSubMenuOpen] = useState(false);
-    const toggleSubMenu = () => {
-        setSubMenuOpen(!subMenuOpen);
-    };
-
-    return (
-        <div className="">
-            {item.submenu ? (
-                <>
-                    <button
-                        onClick={toggleSubMenu}
-                        className={`flex flex-row items-center p-2 rounded-lg hover-bg-[#F2F4E0] w-full justify-between hover:bg-[#F2F4E0] ${pathname.includes(item.path) ? 'bg-[#F2F4E0]' : ''
-                            }`}
-                    >
-                        <div className="flex flex-row space-x-4 items-center">
-                            {item.icon}
-                            <span className="font-thin text-[14px]  flex">{item.title}</span>
-                        </div>
-
-                        <div className={`${subMenuOpen ? 'rotate-180' : ''} flex`}>
-                            <Icon icon="lucide:chevron-down" width="18" height="18" />
-                        </div>
-                    </button>
-
-                    {subMenuOpen && (
-                        <div className="my-2 ml-12 flex flex-col space-y-4">
-                            {item.subMenuItems?.map((subItem, idx) => {
-                                return (
-                                    <Link
-                                        key={idx}
-                                        href={subItem.path}
-                                        className={`${subItem.path === pathname ? 'text-[#797F65]' : ''
-                                            }`}
-                                    >
-                                        <span className="font-thin text-[12px]">{subItem.title}</span>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    )}
-                </>
-            ) : (
-                <Link
-                    href={item.path}
-                    className={`flex flex-row space-x-4 items-center p-2 rounded-lg hover:bg-[#F2F4E0] ${item.path === pathname ? 'bg-[#F2F4E0]' : ''
-                        }`}
-                >
-                    {item.icon}
-                    <span className="font-thin text-[14px] flex">{item.title}</span>
-                </Link>
-            )}
-        </div>
-    );
-};

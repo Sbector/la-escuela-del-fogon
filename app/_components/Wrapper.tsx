@@ -6,7 +6,7 @@ interface WrapperProps {
 
 export default function Wrapper({ children }: WrapperProps) {
   return (
-    <div className="flex flex-col mt-16 w-screen h-[calc(100vh-4rem)] px-0">
+    <div className="flex flex-col mt-16 w-screen h-[calc(100dvh-4rem)] px-0">
       {children}
     </div>
   );

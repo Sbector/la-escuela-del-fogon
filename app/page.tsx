@@ -1,4 +1,5 @@
 import Card from "./_components/Card"
+import UnderConstructionBanner from "./_components/UnderConstructionBanner"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function HomePage() {
       location: "CDMX",
       type: "Publicación",
       title: "Manual para la elaboración de anafre de lata",
+      slug: "/casos/manual-anafre-lata",
     },
     {
       imageUrl: "/images/caso3.png",
@@ -23,6 +25,7 @@ export default function HomePage() {
       location: "CDMX",
       type: "Fogón",
       title: "Los anafres de Jaime",
+      slug: "/casos/anafres-jaime",
     },
     {
       imageUrl: "/images/caso2.png",
@@ -31,6 +34,7 @@ export default function HomePage() {
       location: "Zapopan, Mex.",
       type: "exhibición",
       title: "Cocinar la revolución en América",
+      slug: "/casos/cocinar-revolucion",
     },
     {
       imageUrl: "/images/caso1.png",
@@ -39,6 +43,7 @@ export default function HomePage() {
       location: "Zapopan, Mex.",
       type: "fogón",
       title: "Cocinar la revolución en América",
+      slug: "/casos/cocinar-revolucion-america",
     },
   ]
 
@@ -56,9 +61,14 @@ export default function HomePage() {
             location={item.location}
             type={item.type}
             title={item.title}
+            slug={item.slug}
+            isComingSoon={true}
           />
         ))}
       </main>
+
+      {/* Banner de construcción */}
+      <UnderConstructionBanner message="Sitio en desarrollo" />
     </>
   )
 }

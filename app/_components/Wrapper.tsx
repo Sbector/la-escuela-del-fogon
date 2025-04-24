@@ -1,13 +1,9 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from "react"
 
 interface WrapperProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export default function Wrapper({ children }: WrapperProps) {
-  return (
-    <div className="flex flex-col mt-16 w-screen h-[calc(100dvh-4rem)] px-0">
-      {children}
-    </div>
-  );
+  return <div className="flex flex-col mt-16 w-screen h-[calc(100dvh-4rem)] px-0 overflow-hidden">{children}</div>
 }

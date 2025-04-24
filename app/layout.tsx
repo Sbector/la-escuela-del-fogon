@@ -1,7 +1,7 @@
 import type React from "react"
+import type { Metadata } from "next"
 import { Azeret_Mono } from "next/font/google"
 import Header from "./_components/Header"
-import Wrapper from "./_components/Wrapper"
 import "./globals.css"
 
 const azeret = Azeret_Mono({
@@ -9,15 +9,15 @@ const azeret = Azeret_Mono({
   display: "swap",
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "LA ESCUELA DEL FOGÓN",
   description:
-    "Plataforma dedicada a la investigación y difusión de conocimientos sobre fogones tradicionales y técnicas culinarias",
+    "Archivo que documenta las protestas a través de la cocina en América",
   keywords: "fogón, cocina tradicional, anafre, técnicas culinarias, gastronomía mexicana",
   openGraph: {
     title: "LA ESCUELA DEL FOGÓN",
     description:
-      "Plataforma dedicada a la investigación y difusión de conocimientos sobre fogones tradicionales y técnicas culinarias",
+      "Archivo que documenta las protestas a través de la cocina en América",
     url: "https://laescueladelfogon.com",
     siteName: "LA ESCUELA DEL FOGÓN",
     locale: "es_MX",
@@ -31,14 +31,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html
-      lang="es"
-      className={`
-      ${azeret.className} bg-neutral-50`}
-    >
-      <body>
+    <html lang="es" className={`${azeret.className} bg-neutral-50`}>
+      <body className="pt-16">
         <Header />
-        <Wrapper>{children}</Wrapper>
+        {children}
       </body>
     </html>
   )

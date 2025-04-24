@@ -17,6 +17,7 @@ export default function HomePage() {
       type: "Publicación",
       title: "Manual para la elaboración de anafre de lata",
       slug: "/casos/manual-anafre-lata",
+      isComingSoon: false, // Este proyecto ya está disponible
     },
     {
       imageUrl: "/images/caso3.png",
@@ -26,6 +27,7 @@ export default function HomePage() {
       type: "Fogón",
       title: "Los anafres de Jaime",
       slug: "/casos/anafres-jaime",
+      isComingSoon: true, // Este proyecto sigue en desarrollo
     },
     {
       imageUrl: "/images/caso2.png",
@@ -35,6 +37,7 @@ export default function HomePage() {
       type: "exhibición",
       title: "Cocinar la revolución en América",
       slug: "/casos/cocinar-revolucion",
+      isComingSoon: true, // Este proyecto sigue en desarrollo
     },
     {
       imageUrl: "/images/caso1.png",
@@ -44,11 +47,12 @@ export default function HomePage() {
       type: "fogón",
       title: "Cocinar la revolución en América",
       slug: "/casos/cocinar-revolucion-america",
+      isComingSoon: true, // Este proyecto sigue en desarrollo
     },
   ]
 
   return (
-    <>
+    <div className="flex flex-col w-screen h-[calc(100dvh-4rem)] px-0 overflow-hidden">
       {/* Contenido principal */}
       <main className="snap-y snap-mandatory overflow-scroll h-screen no-scrollbar">
         {/* Tarjetas */}
@@ -62,13 +66,13 @@ export default function HomePage() {
             type={item.type}
             title={item.title}
             slug={item.slug}
-            isComingSoon={true}
+            isComingSoon={item.isComingSoon}
           />
         ))}
       </main>
 
       {/* Banner de construcción */}
       <UnderConstructionBanner message="Sitio en desarrollo" />
-    </>
+    </div>
   )
 }

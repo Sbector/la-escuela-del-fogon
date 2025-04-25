@@ -102,23 +102,27 @@ export default function AnafresJaimePage() {
           </section>
 
           {/* FRASES FINALES */}
-          <section className="pt-8 pb-8">
-            <h2 className="text-2xl">
-              En un contexto lleno <br />
-              de adversidades
-            </h2>
-            <h2 className="text-2xl pt-8">
-              Todo puede <br />
-              ser un anafre
-            </h2>
-            <figure className="my-4">
+          <section className="flex flex-col md:flex-row md:gap-8 lg:gap-24 md:justify-start md:items-center pt-8 pb-8">
+            <div className="pb-16">
+              <h2 className="text-2xl">
+                En un contexto lleno <br />
+                de adversidades
+              </h2>
+              <h2 className="text-2xl pt-8">
+                Todo puede <br />
+                ser un anafre
+              </h2>
+            </div>
+            <figure className="flex items-center justify-center w-full md:w-[40%] max-w-lg h-64 md:h-72">
               <img
                 src="/images/manual/09.svg"
-                alt="Los anafres de Jaime - Proyector en CDMX"
-                className="w-full h-auto object-contain aspect-video"
+                alt="..."
+                className="w-full h-full object-cover translate-y-2"
               />
             </figure>
           </section>
+
+
 
           {/* BOTÓN FINAL */}
           <div className="flex justify-between pt-8">

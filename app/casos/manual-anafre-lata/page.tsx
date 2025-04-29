@@ -129,7 +129,7 @@ export default function ManualAnafresPage() {
               <Button href="../LEDF_MANUAL_ZINE.pdf" target="_blank">
                 consulta <span className="text-sm font-extralight">(40.4MB)</span>
               </Button>
-              <Button href="../MANUAL_ARMADO  .pdf" target="_blank">
+              <Button href="../MANUAL_ARMADO.pdf" target="_blank">
                 impresión <span className="text-sm font-extralight">(40.4MB)</span>
               </Button>
             </div>

@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Azeret_Mono } from "next/font/google"
 import Header from "./_components/Header"
+import Nav from "./_components/Nav"
 import "./globals.css"
 
 const azeret = Azeret_Mono({
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html lang="es" className={`${azeret.className} bg-neutral-50`}>
       <body className="pt-16">
         <Header />
+        <Nav />
         {children}
       </body>
     </html>

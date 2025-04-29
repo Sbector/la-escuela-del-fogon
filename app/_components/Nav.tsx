@@ -1,70 +1,86 @@
+"use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
-import { motion } from "framer-motion" // Importar framer-motion
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function Nav() {
-    const navLinks = [
-        { name: "INICIO", href: "/" },
-        { name: "ABOUT", href: "/about" },
-        { name: "CASOS", href: "/casos" },
-        { name: "CONTACTO", href: "/contacto" },
-    ]
+  const navLinks = [
+    { name: "INICIO", href: "/" },
+    { name: "CONTACTO", href: "/contacto" },
+  ]
 
-    const [isMenuOpen, setMenuOpen] = useState(false)
-    const pathname = usePathname()
+  const [isMenuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
-    const toggleMenu = () => {
-        setMenuOpen(!isMenuOpen)
-    }
-    return (
-        <>
-        {/* Usar motion.button para animación */}
-        <motion.button
-                onClick={toggleMenu}
-                className={`bg-black 
-                flex items-center justify-center 
-                rounded-full focus:outline-none transition-all duration-300`}
-                initial={{ width: "2rem", height: "2rem" }} // Tamaño inicial
-                animate={{
-                    scale: isMenuOpen ? 200 : 1.1, // Escala al hacer clic
-                    borderRadius: isMenuOpen ? "50%" : "50%", // Mantiene la forma circular
-                    top: isMenuOpen ? "0" : "0", // Alinea al centro cuando el menú está abierto
-                    left: isMenuOpen ? "0" : "0", // Alinea al centro cuando el menú está abierto
-                    x: isMenuOpen ? "0" : "0", // Ajuste para centrar el círculo
-                    y: isMenuOpen ? "%" : "0", // Ajuste para centrar el círculo
-                }}
-                transition={{ duration: 0.25 }} // Transición suave
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen)
+  }
+
+  return (
+    <>
+      {/* Botón del menú */}
+      <motion.button
+        onClick={toggleMenu}
+        className={`
+          flex items-center justify-center 
+          rounded-full focus:outline-none z-50
+          fixed top-0 right-4 md:right-8
+          h-16 w-10
+        `}
+        aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+      >
+        <motion.div
+          className={`rounded-full ${isMenuOpen ? "bg-neutral-50" : "bg-neutral-900"}`}
+          initial={{ width: "0.5rem", height: "0.5rem" }}
+          animate={{
+            width: isMenuOpen ? "1.2rem" : "1rem",
+            height: isMenuOpen ? "1.2rem" : "1rem",
+          }}
+          transition={{ duration: 0.2 }}
+        ></motion.div>
+      </motion.button>
+
+      {/* Overlay del menú */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-neutral-900 z-40 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.97 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.ul
+              className="text-center space-y-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.3 }}
             >
-            </motion.button>
-
-            {/* Menú animado */}
-            {isMenuOpen && (
-                <motion.div
-                    className="fixed inset-0 flex items-center justify-center text-white z-50"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }} // Efecto al cerrar
-                    transition={{ duration: 0.7 }}
-                >
-                    <ul className="text-center text-4xl space-y-6">
-                        {navLinks.map((link) => {
-                            const isActive = pathname.startsWith(link.href)
-                            return (
-                                <li key={link.name}>
-                                    <Link
-                                        href={link.href}
-                                        onClick={() => setMenuOpen(false)} // Cierra el menú al hacer clic
-                                        className={`hover:underline ${isActive ? "font-bold" : "font-normal"}`}
-                                    >
-                                        {link.name}
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </motion.div>
-            )}
-        </>
-    )
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
+                return (
+                  <motion.li
+                    key={link.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${isActive ? "underline" : ""
+                        }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.li>
+                )
+              })}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  )
 }

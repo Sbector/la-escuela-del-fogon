@@ -13,9 +13,7 @@ export default function Button({ href, children, className = "", target }: Butto
     <Link
       href={href}
       target={target}
-      className={`w-52 bg-gray-200 text-center 
-        hover:bg-gray-300 hover:text-black 
-        px-2 py-1 
+      className={`inline-block px-8 py-3 border border-neutral-900 hover:bg-neutral-900 hover:text-neutral-50 transition-colors uppercase text-sm tracking-wider 
         ${className}`}
     >
       <button>{children}</button>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Aprende a elaborar un anafre con materiales de reciclaje",
 }
 
-export default function AnafresJaimePage() {
+export default function ManualAnafresPage() {
   return (
     <main className="container mx-auto px-4 py-8">
       <Link
@@ -122,17 +122,20 @@ export default function AnafresJaimePage() {
             </figure>
           </section>
 
-
-
           {/* BOTÓN FINAL */}
-          <div className="flex justify-between pt-8">
-            <Button href="../LEDF_MANUAL_ZINE.pdf" target="_blank">
-              Descargar manual
-            </Button>
+          <div className="text-center md:text-left justify-center border-t border-black">
+            <h1 className="pt-4 text-lg font-bold">Descargar manual para:</h1>
+            <div className="flex flex-col items-center md:flex-row mx-auto gap-4 pt-8">
+              <Button href="../LEDF_MANUAL_ZINE.pdf" target="_blank">
+                consulta <span className="text-sm font-extralight">(40.4MB)</span>
+              </Button>
+              <Button href="../MANUAL_ARMADO  .pdf" target="_blank">
+                impresión <span className="text-sm font-extralight">(40.4MB)</span>
+              </Button>
+            </div>
           </div>
         </div>
       </article>
     </main>
-
   )
 }

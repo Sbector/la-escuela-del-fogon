@@ -18,8 +18,7 @@ export default function Header() {
     >
       <Link href="/" aria-label="Ir a la página principal">
         <h1 className={`${xanhMono.className}`}>
-          <span className="text-4xl md:hidden">LEDF</span>
-          <span className="text-4xl hidden md:flex">LA ESCUELA DEL FOGÓN</span>
+          <span className="text-2xl md:text-4xl">LA ESCUELA DEL FOGÓN</span>
         </h1>
       </Link>
     </header>

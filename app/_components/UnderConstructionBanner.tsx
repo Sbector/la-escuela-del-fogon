@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Xanh_Mono } from "next/font/google"
 
 const xanhMono = Xanh_Mono({
@@ -17,7 +17,19 @@ export default function UnderConstructionBanner({
   message = "Estamos trabajando en el contenido de estos proyectos",
   showCloseButton = true,
 }: UnderConstructionBannerProps) {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    // Verificar si es la primera visita
+    const hasVisited = localStorage.getItem("hasVisitedBefore")
+
+    if (!hasVisited) {
+      // Si es la primera visita, mostrar el banner
+      setIsVisible(true)
+      // Marcar que ya ha visitado el sitio
+      localStorage.setItem("hasVisitedBefore", "true")
+    }
+  }, [])
 
   if (!isVisible) return null
 

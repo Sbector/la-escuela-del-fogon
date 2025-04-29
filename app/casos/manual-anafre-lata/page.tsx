@@ -25,15 +25,15 @@ export default function ManualAnafresPage() {
 
       <article className="max-w-4xl mx-auto">
         <header className="mb-8">
-          <div className="flex items-center gap-4 mb-2">
-            <span className={`${xanhMono.className} text-sm border border-neutral-900 rounded-xl px-1`}>
-              03
-            </span>
-            <span className="text-sm uppercase">Proyector • CDMX • Fogón</span>
-          </div>
           <h1 className={`${xanhMono.className} text-4xl md:text-5xl mb-6`}>
             Manual para la elaboración de anafre de lata
           </h1>
+          <div className="flex items-center gap-4 mb-2 font-light">
+            <span className={`${xanhMono.className} text-sm border border-neutral-900 rounded-xl px-1`}>
+              04
+            </span>
+            <span className="text-sm uppercase">Foodscapes • CDMX • Publicación</span>
+          </div>
         </header>
 
         <figure className="mb-8">

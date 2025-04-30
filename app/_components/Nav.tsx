@@ -1,20 +1,44 @@
 "use client"
 import Link from "next/link"
+import type React from "react"
+
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { cases } from "../_data/cases"
 
 export default function Nav() {
-  const navLinks = [
-    { name: "INICIO", href: "/" },
-    { name: "CONTACTO", href: "/contacto" },
-  ]
-
   const [isMenuOpen, setMenuOpen] = useState(false)
+  const [isDropdownOpen, setDropdownOpen] = useState(false)
   const pathname = usePathname()
+  const dropdownRef = useRef<HTMLLIElement>(null)
+
+  // Cerrar dropdown al hacer clic fuera
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  // Cerrar dropdown al cambiar de ruta
+  useEffect(() => {
+    setDropdownOpen(false)
+  }, [pathname])
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen)
+    if (isDropdownOpen) setDropdownOpen(false)
+  }
+
+  const toggleDropdown = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setDropdownOpen(!isDropdownOpen)
   }
 
   return (
@@ -51,33 +75,128 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <motion.ul
-              className="text-center space-y-8"
+            <motion.div
+              className="text-center py-20 px-4 w-full max-w-md"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.3 }}
             >
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href))
-                return (
-                  <motion.li
-                    key={link.name}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
+              {/* Enlaces principales */}
+              <motion.ul className="space-y-6">
+                {/* Enlace INICIO */}
+                <motion.li
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Link
+                    href="/"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${
+                      pathname === "/" ? "underline" : ""
+                    }`}
                   >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${isActive ? "underline" : ""
-                        }`}
+                    INICIO
+                  </Link>
+                </motion.li>
+
+                {/* Dropdown CASOS */}
+                <motion.li
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: 0.1 }}
+                  className="relative"
+                  ref={dropdownRef as React.Ref<HTMLLIElement>}
+                >
+                  <button
+                    onClick={toggleDropdown}
+                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity flex items-center justify-center mx-auto ${
+                      pathname.includes("/casos") ? "underline" : ""
+                    }`}
+                  >
+                    CASOS
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`ml-2 w-5 h-5 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
                     >
-                      {link.name}
-                    </Link>
-                  </motion.li>
-                )
-              })}
-            </motion.ul>
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+
+                  {/* Dropdown menu */}
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="mt-4 py-4 px-6 bg-neutral-800 rounded-md text-left" // Cambiado a text-left
+                      >
+                        <ul className="space-y-3">
+                          {cases.map((caseItem) => {
+                            const isActive = pathname === caseItem.slug
+                            return (
+                              <li key={caseItem.caseNumber}>
+                                {caseItem.isComingSoon ? (
+                                  // Caso inactivo (en desarrollo) - sin funcionalidad de clic
+                                  <div className="text-neutral-50/40 text-lg flex items-center gap-2 cursor-default">
+                                    <span className="opacity-60 text-sm font-thin">{caseItem.caseNumber}</span>
+                                    <span className="line-clamp-2">{caseItem.title}</span>
+                                    <span className="text-xs font-extralight uppercase bg-neutral-700 px-1.5 py-0.5 rounded text-neutral-300 ml-1 mt-1 whitespace-nowrap">
+                                      Próx.
+                                    </span>
+                                  </div>
+                                ) : (
+                                  // Caso activo
+                                  <Link
+                                    href={caseItem.slug}
+                                    onClick={() => setMenuOpen(false)}
+                                    className={`text-neutral-50 text-lg hover:opacity-70 transition-opacity flex items-center gap-2 ${
+                                      isActive ? "font-medium" : ""
+                                    }`}
+                                  >
+                                    <span className="text-sm font-thin">{caseItem.caseNumber}</span>
+                                    <span className={`line-clamp-2 ${isActive ? "underline underline-offset-4" : ""}`}>
+                                      {caseItem.title}
+                                    </span>
+                                  </Link>
+                                )}
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.li>
+
+                {/* Enlace CONTACTO */}
+                <motion.li
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, delay: 0.2 }}
+                >
+                  <Link
+                    href="/contacto"
+                    onClick={() => setMenuOpen(false)}
+                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${
+                      pathname === "/contacto" ? "underline" : ""
+                    }`}
+                  >
+                    CONTACTO
+                  </Link>
+                </motion.li>
+              </motion.ul>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

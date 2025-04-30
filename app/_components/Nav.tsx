@@ -13,6 +13,37 @@ export default function Nav() {
   const pathname = usePathname()
   const dropdownRef = useRef<HTMLLIElement>(null)
 
+  // Controlar el scroll del body cuando el menú está abierto
+  useEffect(() => {
+    if (isMenuOpen) {
+      // Guardar la posición actual del scroll
+      const scrollY = window.scrollY
+
+      // Bloquear el scroll y mantener la posición
+      document.body.style.position = "fixed"
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.width = "100%"
+    } else {
+      // Restaurar el scroll cuando el menú se cierra
+      const scrollY = document.body.style.top
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.width = ""
+
+      // Restaurar la posición del scroll
+      if (scrollY) {
+        window.scrollTo(0, Number.parseInt(scrollY || "0", 10) * -1)
+      }
+    }
+
+    // Limpiar al desmontar el componente
+    return () => {
+      document.body.style.position = ""
+      document.body.style.top = ""
+      document.body.style.width = ""
+    }
+  }, [isMenuOpen])
+
   // Cerrar dropdown al hacer clic fuera
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -69,7 +100,7 @@ export default function Nav() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed inset-0 bg-neutral-900 z-40 flex items-center justify-center"
+            className="fixed inset-0 bg-neutral-900 z-40 flex items-center justify-center overflow-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.97 }}
             exit={{ opacity: 0 }}
@@ -92,9 +123,8 @@ export default function Nav() {
                   <Link
                     href="/"
                     onClick={() => setMenuOpen(false)}
-                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${
-                      pathname === "/" ? "underline" : ""
-                    }`}
+                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${pathname === "/" ? "underline" : ""
+                      }`}
                   >
                     INICIO
                   </Link>
@@ -110,9 +140,8 @@ export default function Nav() {
                 >
                   <button
                     onClick={toggleDropdown}
-                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity flex items-center justify-center mx-auto ${
-                      pathname.includes("/casos") ? "underline" : ""
-                    }`}
+                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity flex items-center justify-center mx-auto ${pathname.includes("/casos") ? "underline" : ""
+                      }`}
                   >
                     CASOS
                     <svg
@@ -139,7 +168,7 @@ export default function Nav() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="mt-4 py-4 px-6 bg-neutral-800 rounded-md text-left" // Cambiado a text-left
+                        className="mt-4 py-4 px-6 bg-neutral-800 rounded-md text-left max-h-[50vh] overflow-auto"
                       >
                         <ul className="space-y-3">
                           {cases.map((caseItem) => {
@@ -149,8 +178,8 @@ export default function Nav() {
                                 {caseItem.isComingSoon ? (
                                   // Caso inactivo (en desarrollo) - sin funcionalidad de clic
                                   <div className="text-neutral-50/40 text-lg flex items-center gap-2 cursor-default">
-                                    <span className="opacity-60 text-sm font-thin">{caseItem.caseNumber}</span>
-                                    <span className="line-clamp-2">{caseItem.title}</span>
+                                    <span className="opacity-60 text-sm font-extralight">{caseItem.caseNumber}</span>
+                                    <span className="truncate">{caseItem.title}</span>
                                     <span className="text-xs font-extralight uppercase bg-neutral-700 px-1.5 py-0.5 rounded text-neutral-300 ml-1 mt-1 whitespace-nowrap">
                                       Próx.
                                     </span>
@@ -160,12 +189,11 @@ export default function Nav() {
                                   <Link
                                     href={caseItem.slug}
                                     onClick={() => setMenuOpen(false)}
-                                    className={`text-neutral-50 text-lg hover:opacity-70 transition-opacity flex items-center gap-2 ${
-                                      isActive ? "font-medium" : ""
-                                    }`}
+                                    className={`text-neutral-50 text-lg hover:opacity-70 transition-opacity flex items-center gap-2 ${isActive ? "font-medium" : ""
+                                      }`}
                                   >
-                                    <span className="text-sm font-thin">{caseItem.caseNumber}</span>
-                                    <span className={`line-clamp-2 ${isActive ? "underline underline-offset-4" : ""}`}>
+                                    <span className="text-sm font-extralight">{caseItem.caseNumber}</span>
+                                    <span className={`truncate ${isActive ? "underline underline-offset-4" : ""}`}>
                                       {caseItem.title}
                                     </span>
                                   </Link>
@@ -188,9 +216,8 @@ export default function Nav() {
                   <Link
                     href="/contacto"
                     onClick={() => setMenuOpen(false)}
-                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${
-                      pathname === "/contacto" ? "underline" : ""
-                    }`}
+                    className={`text-neutral-50 text-3xl md:text-4xl hover:opacity-70 transition-opacity ${pathname === "/contacto" ? "underline" : ""
+                      }`}
                   >
                     CONTACTO
                   </Link>

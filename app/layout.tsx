@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${azeret.className} bg-neutral-50`}>
+    <html lang="es" className={`${azeret.className} bg-neutral-50 overflow-y-auto no-scrollbar`}>
       <body className="pt-16">
         <Header />
         <Nav />
